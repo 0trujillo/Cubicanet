@@ -28,7 +28,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./Frontend:/app  # Para hot-reload, opcional
+      - ./Frontend/sistema-cubicanet:/app  # Para hot-reload, opcional
     depends_on:
       - backend
     networks:
