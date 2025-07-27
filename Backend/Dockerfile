@@ -1,13 +1,17 @@
-# 1) Build
-FROM node:18-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
+FROM python:3.11-slim
 
-# 2) Server
-FROM nginx:stable-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Copia requirements y los instala
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia el código de tu app
+COPY . .
+
+# Expone el puerto del servidor
+EXPOSE 8000
+
+# Comando por defecto
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
