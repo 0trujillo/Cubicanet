@@ -5,10 +5,10 @@ WORKDIR /app
 # Instala build dependencies para compilar psycopg2 y otras librerías nativas
 RUN apk add --no-cache gcc musl-dev libffi-dev
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requeriments.txt .
+RUN pip install --no-cache-dir -r requeriments.txt
 
-COPY . .
+COPY requeriments.txt .
 
 EXPOSE 8000
 
