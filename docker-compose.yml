@@ -9,9 +9,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./Backend:/app  # Para hot-reload en desarrollo, opcional
+      - ./backend:/app  # Para hot-reload en desarrollo, opcional
     environment:
-      - DB_HOST=10.242.7.106
+      - DB_HOST=192.168.100.149
       - DB_PORT=5432
       - DB_USER=benjamin
       - DB_PASSWORD=Ben1258
@@ -22,7 +22,7 @@ services:
 
   frontend:
     build:
-      context: Frontend/sistema-cubicanet
+      context: frontend/sistema-cubicanet
       dockerfile: Dockerfile
     container_name: cubicanet_frontend
     ports:
