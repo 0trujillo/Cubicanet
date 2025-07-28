@@ -1,15 +1,18 @@
-FROM python:3.11-alpine
+FROM python:3.11-slim
 
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Instala build dependencies para compilar psycopg2 y otras librerías nativas
-RUN apk add --no-cache gcc musl-dev libffi-dev
+# Copia requirements y los instala
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY requeriments.txt .
-RUN pip install --no-cache-dir -r requeriments.txt
+# Copia el código de tu app
+COPY . .
 
-COPY requeriments.txt .
-
+# Expone el puerto del servidor
 EXPOSE 8000
 
+# Comando por defecto
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
