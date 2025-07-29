@@ -1,23 +1,23 @@
 <template>
-  <table class="w-full table-auto border border-gray-300">
+  <table class="tabla-empleados">
     <thead>
-      <tr class="bg-gray-100">
-        <th class="p-2">ID</th>
-        <th class="p-2">Nombre</th>
-        <th class="p-2">RUT</th>
-        <th class="p-2">Correo</th>
-        <th class="p-2">Acciones</th>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>RUT</th>
+        <th>Correo</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="empleado in empleados" :key="empleado.id" class="border-t">
-        <td class="p-2">{{ empleado.id }}</td>
-        <td class="p-2">{{ empleado.nombre }}</td>
-        <td class="p-2">{{ empleado.rut }}</td>
-        <td class="p-2">{{ empleado.correo_trabajador }}</td>
-        <td class="p-2 flex gap-2">
-          <button class="bg-yellow-400 px-2 py-1 rounded" @click="$emit('editar', empleado)">Editar</button>
-          <button class="bg-red-500 text-white px-2 py-1 rounded" @click="$emit('eliminar', empleado.id)">Eliminar</button>
+      <tr v-for="empleado in empleados" :key="empleado.id">
+        <td>{{ empleado.id }}</td>
+        <td>{{ empleado.nombre }}</td>
+        <td>{{ empleado.rut }}</td>
+        <td>{{ empleado.correo_trabajador }}</td>
+        <td>
+          <button class="btn-edit" @click="$emit('editar', empleado)">Editar</button>
+          <button class="btn-delete" @click="$emit('eliminar', empleado.id)">Eliminar</button>
         </td>
       </tr>
     </tbody>
@@ -35,3 +35,45 @@ defineProps({
 
 defineEmits(['editar', 'eliminar'])
 </script>
+
+<style scoped>
+.tabla-empleados {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.tabla-empleados th, .tabla-empleados td {
+  border: 1px solid #ccc;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+.tabla-empleados th {
+  background: #f3f3f3;
+  font-weight: bold;
+}
+.btn-edit {
+  background: #facc15;
+  color: #333;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+.btn-delete {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-edit:hover {
+  background: #eab308;
+}
+.btn-delete:hover {
+  background: #b91c1c;
+}
+</style>

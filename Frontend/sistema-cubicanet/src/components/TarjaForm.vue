@@ -1,10 +1,10 @@
 <template>
-  <form class="mb-4 p-4 border rounded bg-white shadow" @submit.prevent="onSubmit">
-    <div class="mb-2">
-      <label class="block text-sm font-medium">RUT</label>
-      <input v-model="form.rut" class="border p-2 w-full rounded" required />
+  <form class="form-box" @submit.prevent="onSubmit">
+    <div class="form-group">
+      <label>RUT</label>
+      <input v-model="form.rut" required />
     </div>
-    <button class="bg-green-500 text-white px-4 py-2 rounded" type="submit">Marcar Entrada/Salida</button>
+    <button class="btn-primary" type="submit">Marcar Entrada/Salida</button>
   </form>
 </template>
 
@@ -18,3 +18,43 @@ function onSubmit() {
   form.value = { rut: '' }
 }
 </script>
+
+<style scoped>
+.form-box {
+  max-width: 400px;
+  margin: 0 auto 1.5rem auto;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.btn-primary {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover {
+  background: #16a34a;
+}
+</style>

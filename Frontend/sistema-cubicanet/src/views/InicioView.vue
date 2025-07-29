@@ -1,7 +1,6 @@
-<!-- src/views/InicioView.vue -->
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Lista de empleados</h1>
+  <div class="view-box">
+    <h1 class="titulo">Lista de empleados</h1>
     <EmpleadoTabla :empleados="empleados" @eliminar="eliminarEmpleado" />
   </div>
 </template>
@@ -26,3 +25,19 @@ const eliminarEmpleado = async (id) => {
 
 onMounted(() => obtenerEmpleados())
 </script>
+
+<style scoped>
+.view-box {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem;
+}
+.titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+</style>
