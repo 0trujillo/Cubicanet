@@ -3,34 +3,20 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./Backend
+      context: ./backend
       dockerfile: Dockerfile
     container_name: cubicanet_backend
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app  # Para hot-reload en desarrollo, opcional
+      - ./backend:/app
     environment:
       - DB_HOST=192.168.100.149
       - DB_PORT=5432
       - DB_USER=benjamin
       - DB_PASSWORD=Ben1258
-      - DB_NAME=postgres  # ajusta si tu base de datos tiene otro nombre
+      - DB_NAME=cubicanet
       - FLASK_ENV=development
-    networks:
-      - cubicanet
-
-  frontend:
-    build:
-      context: frontend/sistema-cubicanet
-      dockerfile: Dockerfile
-    container_name: cubicanet_frontend
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./Frontend/sistema-cubicanet:/app  # Para hot-reload, opcional
-    depends_on:
-      - backend
     networks:
       - cubicanet
 

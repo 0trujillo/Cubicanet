@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from backend.schemas.empleados import EmpleadoCreate
-from backend.db.models import Empleado
+from schemas.empleados import EmpleadoCreate
+from db.models import Empleado
 
 def crear_empleado(db: Session, empleado: EmpleadoCreate):
     db_empleado = Empleado(**empleado.dict())
