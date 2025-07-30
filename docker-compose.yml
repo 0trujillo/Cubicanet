@@ -19,6 +19,18 @@ services:
       - FLASK_ENV=development
     networks:
       - cubicanet
-
+  frontend:
+    build:
+      context: ./Frontend/sistema-cubicanet
+      dockerfile: Dockerfile
+    container_name: cubicanet_frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Frontend/sistema-cubicanet:/app
+    depends_on:
+      - backend
+    networks:
+      - cubicanet
 networks:
   cubicanet:
