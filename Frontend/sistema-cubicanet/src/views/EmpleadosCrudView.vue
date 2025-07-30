@@ -5,69 +5,32 @@
     <h1 class="titulo">CRUD de Empleados</h1>
     <section>
       <h2 class="subtitulo">Agregar Empleado</h2>
-      <EmpleadoForm v-if="!editando" @agregar="agregarEmpleado" />
-      <div v-if="editando" class="edit-section">
-        <h2 class="subtitulo">Editar Empleado</h2>
-        <EmpleadoForm :empleado="empleadoEdit" @agregar="actualizarEmpleado" />
-        <button class="btn-cancelar" @click="cancelarEdicion">Cancelar</button>
+      <!-- Mostrar el formulario siempre, sin lógica -->
+      <EmpleadoForm />
+      <div class="edit-section" style="margin-top:2rem;">
+        <h2 class="subtitulo">Editar Empleado (demo)</h2>
+        <EmpleadoForm :empleado="{nombre:'Ejemplo',rut:'1-9',correo_trabajador:'ejemplo@mail.com',fecha_nacimiento:'2000-01-01',estado_civil_id:1}" />
+        <button class="btn-cancelar" disabled>Cancelar</button>
       </div>
     </section>
     <section>
       <h2 class="subtitulo">Lista de Empleados</h2>
-      <EmpleadoTabla :empleados="empleados" @editar="editarEmpleado" @eliminar="eliminarEmpleado" />
+      <!-- Tabla con datos de ejemplo y botones -->
+      <EmpleadoTabla :empleados="empleadosDemo" />
     </section>
   </div>
 </template>
 
+onMounted(async () => {
 <script setup>
-import { ref, onMounted } from 'vue'
-import { obtenerEmpleados, crearEmpleado, actualizarEmpleado as apiActualizarEmpleado, eliminarEmpleado as apiEliminarEmpleado } from '@/api/empleados'
 import EmpleadoTabla from '@/components/EmpleadoTabla.vue'
 import EmpleadoForm from '@/components/EmpleadoForm.vue'
 
-
-const empleados = ref([])
-const editando = ref(false)
-const empleadoEdit = ref(null)
-
-onMounted(async () => {
-  const res = await obtenerEmpleados()
-  empleados.value = res.data
-})
-
-
-function agregarEmpleado(nuevoEmpleado) {
-  crearEmpleado(nuevoEmpleado).then(() => {
-    obtenerEmpleados().then(res => empleados.value = res.data)
-  })
-}
-
-function editarEmpleado(empleado) {
-  editando.value = true
-  empleadoEdit.value = { ...empleado }
-}
-
-function actualizarEmpleado(empleadoActualizado) {
-  apiActualizarEmpleado(empleadoActualizado).then(() => {
-    obtenerEmpleados().then(res => empleados.value = res.data)
-    editando.value = false
-    empleadoEdit.value = null
-  })
-}
-
-function cancelarEdicion() {
-  editando.value = false
-  empleadoEdit.value = null
-}
-
-function eliminarEmpleado(id) {
-  if (confirm('¿Seguro que deseas eliminar este empleado?')) {
-    apiEliminarEmpleado(id).then(() => {
-      obtenerEmpleados().then(res => empleados.value = res.data)
-    })
-  }
-}
-
+// Datos de ejemplo para mostrar la UI
+const empleadosDemo = [
+  { id: 1, nombre: 'Juan Pérez', rut: '11.111.111-1', correo_trabajador: 'juan@mail.com' },
+  { id: 2, nombre: 'Ana Gómez', rut: '22.222.222-2', correo_trabajador: 'ana@mail.com' },
+];
 </script>
 
 <style scoped>
