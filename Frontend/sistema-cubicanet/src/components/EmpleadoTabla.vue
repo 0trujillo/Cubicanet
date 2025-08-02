@@ -5,7 +5,10 @@
         <th>ID</th>
         <th>Nombre</th>
         <th>RUT</th>
+        <th>Banco</th>
         <th>Correo</th>
+        <th>Fecha Nacimiento</th>
+        <th>Estado Civil</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -14,7 +17,10 @@
         <td>{{ empleado.id }}</td>
         <td>{{ empleado.nombre }}</td>
         <td>{{ empleado.rut }}</td>
+        <td>{{ empleado.banco }}</td>
         <td>{{ empleado.correo_trabajador }}</td>
+        <td>{{ empleado.fecha_nacimiento }}</td>
+        <td>{{ empleado.estado_civil }}</td>
         <td>
           <button class="btn-edit" @click="$emit('editar', empleado)">Editar</button>
           <button class="btn-delete" @click="$emit('eliminar', empleado.id)">Eliminar</button>
@@ -37,21 +43,34 @@ defineEmits(['editar', 'eliminar'])
 </script>
 
 <style scoped>
+/* Estilo más cuadrado y formal */
 .tabla-empleados {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-bottom: 1.5rem;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  background: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid #b0b0b0;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 .tabla-empleados th, .tabla-empleados td {
-  border: 1px solid #ccc;
-  padding: 0.6rem 0.8rem;
-  text-align: left;
+  border: 1px solid #b0b0b0;
+  padding: 0.5rem 0.7rem;
+  text-align: center;
+  vertical-align: middle;
 }
 .tabla-empleados th {
-  background: #f3f3f3;
-  font-weight: bold;
+  background: #e9ecef;
+  font-weight: 600;
+  color: #222;
+  letter-spacing: 0.5px;
+}
+.tabla-empleados tr:nth-child(even) td {
+  background: #f4f6f8;
+}
+.tabla-empleados tr:hover td {
+  background: #e2e6ea;
 }
 .btn-edit {
   background: #facc15;

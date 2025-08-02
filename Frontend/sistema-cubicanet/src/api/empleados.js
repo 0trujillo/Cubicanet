@@ -11,7 +11,7 @@ export function crearEmpleado(empleado) {
 }
 
 export function obtenerEmpleados() {
-  return axios.get(`${API_URL}/empleado`);
+  return axios.get(`${API_URL}/empleados`);
 }
 
 

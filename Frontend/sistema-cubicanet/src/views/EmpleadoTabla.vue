@@ -7,7 +7,7 @@
         <th class="p-2">Nombre</th>
         <th class="p-2">RUT</th>
         <th class="p-2">Correo</th>
-        <th class="p-2">Acciones</th>
+        <th class="p-2">Banco</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +16,8 @@
         <td class="p-2">{{ empleado.nombre }}</td>
         <td class="p-2">{{ empleado.rut }}</td>
         <td class="p-2">{{ empleado.correo_trabajador }}</td>
+        <td class="p-2">{{ empleado.correo_trabajador }}</td>
+
         <td class="p-2 flex gap-2">
           <button class="bg-yellow-400 px-2 py-1 rounded" @click="$emit('editar', empleado)">Editar</button>
           <button class="bg-red-500 text-white px-2 py-1 rounded" @click="$emit('eliminar', empleado.id)">Eliminar</button>

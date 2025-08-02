@@ -18,7 +18,7 @@
 <style scoped>
 .main-bg {
   min-height: 100vh;
-  background: linear-gradient(90deg, #6d28d9 0%, #db2777 50%, #ef4444 100%);
+  background: linear-gradient(90deg, rgb(33, 33, 161));
 }
 .main-nav {
   background: #fff;

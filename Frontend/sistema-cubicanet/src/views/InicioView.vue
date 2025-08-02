@@ -28,7 +28,8 @@ onMounted(() => obtenerEmpleados())
 
 <style scoped>
 .view-box {
-  max-width: 700px;
+  max-width: 10000px;
+  max-width: 2000px;
   margin: 2rem auto;
   background: #fff;
   border-radius: 8px;
