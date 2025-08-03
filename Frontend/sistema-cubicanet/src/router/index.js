@@ -5,7 +5,6 @@ import TarjaView from '@/views/TarjaView.vue'
 
 const routes = [
   { path: '/', component: HomeView },
-  { path: '/empleados', component: EmpleadosCrudView },
   { path: '/tarja', component: TarjaView }
 ]
 

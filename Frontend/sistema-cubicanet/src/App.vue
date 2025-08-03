@@ -1,8 +1,9 @@
+
 <template>
   <div class="main-bg">
     <nav class="main-nav">
       <router-link to="/" class="nav-link">Inicio</router-link>
-      <router-link to="/empleados" class="nav-link">CRUD Empleados</router-link>
+      
       <router-link to="/tarja" class="nav-link">Tarja</router-link>
     </nav>
     <main class="main-content">
@@ -45,3 +46,4 @@
   padding: 2rem 1rem;
 }
 </style>
+

@@ -5,7 +5,6 @@
         <th>ID</th>
         <th>Nombre</th>
         <th>RUT</th>
-        <th>Banco</th>
         <th>Correo</th>
         <th>Fecha Nacimiento</th>
         <th>Estado Civil</th>
@@ -17,10 +16,9 @@
         <td>{{ empleado.id }}</td>
         <td>{{ empleado.nombre }}</td>
         <td>{{ empleado.rut }}</td>
-        <td>{{ empleado.banco }}</td>
         <td>{{ empleado.correo_trabajador }}</td>
         <td>{{ empleado.fecha_nacimiento }}</td>
-        <td>{{ empleado.estado_civil }}</td>
+        <td>{{ estadoCivilNombre(empleado.estado_civil_id) }}</td>
         <td>
           <button class="btn-edit" @click="$emit('editar', empleado)">Editar</button>
           <button class="btn-delete" @click="$emit('eliminar', empleado.id)">Eliminar</button>
@@ -32,13 +30,22 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
+const estadoCivilMap = {
+  1: 'Soltero',
+  2: 'Casado',
+  3: 'Divorciado',
+  4: 'Viudo',
+  5: 'Conviviente',
+}
+function estadoCivilNombre(id) {
+  return estadoCivilMap[id] || id
+}
 defineProps({
   empleados: {
     type: Array,
     required: true,
   },
 })
-
 defineEmits(['editar', 'eliminar'])
 </script>
 
@@ -96,3 +103,4 @@ defineEmits(['editar', 'eliminar'])
   background: #b91c1c;
 }
 </style>
+

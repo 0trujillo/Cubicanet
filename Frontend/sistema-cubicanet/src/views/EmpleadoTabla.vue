@@ -1,4 +1,3 @@
-<!-- src/components/EmpleadoTabla.vue -->
 <template>
   <table class="w-full table-auto border border-gray-300">
     <thead>
