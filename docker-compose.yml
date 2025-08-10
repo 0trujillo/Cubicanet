@@ -1,5 +1,4 @@
-
-version: '3.8'
+version: "3.8"
 
 services:
   backend:
@@ -7,17 +6,11 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: cubicanet_backend
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./backend:/app
-    environment:
-      - DB_HOST=192.168.100.149
-      - DB_PORT=5432
-      - DB_USER=benjamin
-      - DB_PASSWORD=Ben1258
-      - DB_NAME=cubicanet
-      - FLASK_ENV=development
+    env_file:
+      - .env.backend
+    expose:
+      - "8000" # Solo disponible dentro de la red de Docker
+    restart: unless-stopped
     networks:
       - cubicanet
 
@@ -25,13 +18,17 @@ services:
     build:
       context: ./Frontend/sistema-cubicanet
       dockerfile: Dockerfile
+      args:
+        # El frontend hablará con el backend vía /api (mismo origen)
+        VITE_API_URL: ${VITE_API_URL:-/api}
     container_name: cubicanet_frontend
+    # Publicamos el puerto 80 del contenedor SOLO en la IP de ZeroTier del Droplet.
+    # IMPORTANTE: define ZT_BIND_IP en tu .env al valor de la IP de ZeroTier del Droplet, ej. 192.168.100.123
     ports:
-      - "8080:8080"
-    volumes:
-      - ./Frontend/sistema-cubicanet:/app
+      - "${ZT_BIND_IP}:80:80"
     depends_on:
       - backend
+    restart: unless-stopped
     networks:
       - cubicanet
 
