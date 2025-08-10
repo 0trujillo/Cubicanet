@@ -20,12 +20,12 @@
       <label>Estado civil (ID)</label>
       <input v-model.number="form.estado_civil_id" type="number" min="1" required />
     </div>
-    <button class="btn-primary" type="submit">Agregar</button>
+    <button class="btn-primary" type="submit">{{ esEdicion ? 'Actualizar' : 'Agregar' }}</button>
   </form>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, computed } from 'vue'
 const emit = defineEmits(['agregar'])
 const form = ref({
   nombre: '',
@@ -35,15 +35,33 @@ const form = ref({
   estado_civil_id: 1
 })
 
+// Si recibimos un empleado, llenamos el formulario para editar
+watch(() => props.empleado, (nuevo) => {
+  if (nuevo) {
+    form.value = { ...nuevo }
+  } else {
+    form.value = {
+      nombre: '',
+      rut: '',
+      correo_trabajador: '',
+      fecha_nacimiento: '',
+      estado_civil_id: 1
+    }
+  }
+}, { immediate: true })
+
+const esEdicion = computed(() => !!props.empleado)
+
 function onSubmit() {
-  // Formatear fecha_nacimiento a YYYY-MM-DD si es necesario
   emit('agregar', { ...form.value })
-  form.value = {
-    nombre: '',
-    rut: '',
-    correo_trabajador: '',
-    fecha_nacimiento: '',
-    estado_civil_id: 1
+  if (!esEdicion.value) {
+    form.value = {
+      nombre: '',
+      rut: '',
+      correo_trabajador: '',
+      fecha_nacimiento: '',
+      estado_civil_id: 1
+    }
   }
 }
 </script>
@@ -87,3 +105,4 @@ function onSubmit() {
   background: #1d4ed8;
 }
 </style>
+

@@ -2,20 +2,12 @@ import axios from 'axios';
 
 
 // Detecta entorno automáticamente
-let API_URL = '';
-if (process.env.VUE_APP_API_URL) {
-  API_URL = process.env.VUE_APP_API_URL;
-} else if (
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1'
- ) {
-  API_URL = 'http://localhost:8000';
-} else {
-  API_URL = 'http://backend:8000';
-}
+// Usar el proxy /api configurado en nginx para acceder al backend
+const API_URL = '/api';
+
 
 export function crearEmpleado(empleado) {
-  return axios.post(`${API_URL}/empleados`, empleado);
+  return axios.post(`${API_URL}/empleado`, empleado);
 }
 
 export function obtenerEmpleados() {
@@ -23,4 +15,14 @@ export function obtenerEmpleados() {
 }
 
 
-// Puedes agregar más funciones para editar/eliminar empleados según tu backend
+
+// Actualizar empleado (PUT o PATCH según tu backend)
+export function actualizarEmpleado(empleado) {
+  // Suponiendo que el backend espera el id en la URL
+  return axios.put(`${API_URL}/empleado/${empleado.id}`, empleado);
+}
+
+// Eliminar empleado
+export function eliminarEmpleado(id) {
+  return axios.delete(`${API_URL}/empleado/${id}`);
+}

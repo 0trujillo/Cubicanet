@@ -1,8 +1,9 @@
+
 <template>
   <div class="main-bg">
     <nav class="main-nav">
       <router-link to="/" class="nav-link">Inicio</router-link>
-      <router-link to="/empleados" class="nav-link">CRUD Empleados</router-link>
+      
       <router-link to="/tarja" class="nav-link">Tarja</router-link>
     </nav>
     <main class="main-content">
@@ -18,7 +19,7 @@
 <style scoped>
 .main-bg {
   min-height: 100vh;
-  background: linear-gradient(90deg, #6d28d9 0%, #db2777 50%, #ef4444 100%);
+  background: linear-gradient(90deg, rgb(33, 33, 161));
 }
 .main-nav {
   background: #fff;
@@ -45,3 +46,4 @@
   padding: 2rem 1rem;
 }
 </style>
+

@@ -1,3 +1,4 @@
+
 version: '3.8'
 
 services:
@@ -19,6 +20,7 @@ services:
       - FLASK_ENV=development
     networks:
       - cubicanet
+
   frontend:
     build:
       context: ./Frontend/sistema-cubicanet
@@ -32,5 +34,6 @@ services:
       - backend
     networks:
       - cubicanet
+
 networks:
   cubicanet:

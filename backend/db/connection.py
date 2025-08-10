@@ -4,11 +4,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # Datos de conexión
-DB_USER = "benjamin"
-DB_PASSWORD = "Ben1258"
-DB_HOST = "192.168.100.149"
+DB_USER = "postgres"  # Cambia si tu usuario es distinto
+DB_PASSWORD = "Yojansel18"
+DB_HOST = "localhost"  # Cambia si tu host es distinto
 DB_PORT = 5432
-DB_NAME = "cubicanet"   # ajusta si tu base se llama distinto
+DB_NAME = "Cubicanet"   # ajusta si tu base se llama distinto
 
 # URI de SQLAlchemy
 DATABASE_URL = (
