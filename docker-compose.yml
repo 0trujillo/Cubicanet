@@ -8,8 +8,11 @@ services:
     container_name: cubicanet_backend
     env_file:
       - .env.backend
-    expose:
-      - "8000" # Solo disponible dentro de la red de Docker
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Puedes dejar solo 'expose' si no quieres publicar a host:
+    ports:
+      - "8000:8000"
     restart: unless-stopped
     networks:
       - cubicanet
@@ -18,14 +21,13 @@ services:
     build:
       context: ./Frontend/sistema-cubicanet
       dockerfile: Dockerfile
-      args:
-        # El frontend hablará con el backend vía /api (mismo origen)
-        VITE_API_URL: ${VITE_API_URL:-/api}
     container_name: cubicanet_frontend
-    # Publicamos el puerto 80 del contenedor SOLO en la IP de ZeroTier del Droplet.
-    # IMPORTANTE: define ZT_BIND_IP en tu .env al valor de la IP de ZeroTier del Droplet, ej. 192.168.100.123
+    environment:
+      # Para Vue CLI, las variables deben empezar con VUE_APP_
+      VUE_APP_API_URL: "http://backend:8000"
+    # Publica el puerto 80 del host hacia el 8080 del contenedor (dev server)
     ports:
-      - "${ZT_BIND_IP}:80:80"
+      - "${ZT_BIND_IP}:80:8080"
     depends_on:
       - backend
     restart: unless-stopped
