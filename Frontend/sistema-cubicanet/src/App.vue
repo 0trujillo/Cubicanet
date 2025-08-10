@@ -1,26 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main-bg">
+    <nav class="main-nav">
+      <router-link to="/" class="nav-link">Inicio</router-link>
+      <router-link to="/empleados" class="nav-link">CRUD Empleados</router-link>
+      <router-link to="/tarja" class="nav-link">Tarja</router-link>
+    </nav>
+    <main class="main-content">
+      <router-view />
+    </main>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+<script setup>
+// Lógica global opcional
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.main-bg {
+  min-height: 100vh;
+  background: linear-gradient(90deg, #6d28d9 0%, #db2777 50%, #ef4444 100%);
+}
+.main-nav {
+  background: #fff;
+  opacity: 0.95;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 2rem;
+  border-bottom: 1px solid #eee;
+}
+.nav-link {
+  font-weight: bold;
+  color: #6d28d9;
+  text-decoration: none;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-link:hover {
+  background: #ede9fe;
+  color: #db2777;
+}
+.main-content {
+  padding: 2rem 1rem;
 }
 </style>
